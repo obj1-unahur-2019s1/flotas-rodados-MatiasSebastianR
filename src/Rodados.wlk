@@ -29,13 +29,12 @@ class Renault {
 }
 
 object trafic {
-	
-	
-	method color() {return "blanco"}
-	method interior() { return comodo.capacidad() }
+	var property interior = comodo
+	var property motor = pulenta
+		
 	method velocidadMaxima () { }
-	method peso() { return 4000 + com}
-	
+	method peso() { return 4000 + interior.peso() + motor.peso() }
+	method color() { return "blanco" }
 	}
 	
 object comodo {
@@ -53,13 +52,35 @@ object popular {
 
 object pulenta {
 	
-	method capacidad() { return 800 }
+	method peso() { return 800 }
 	method velocidadaMaxima() { return 130 }
 	
 }
 
 object bataton {
 	
-	method capacidad() { return 500 }
+	method peso() { return 500 }
 	method velocidadMaxima() {  return 80 }
 }
+
+class AutosEspeciales {
+	var property capacidad
+	var property velocidadMaxima
+	var property peso
+	var property color
+	
+}
+
+class Dependencia {
+	var property rodados = [] 
+	var property empleados = []
+	
+	
+	method agregarAFlota(rodado) { return rodados.add(rodado) }
+	method quitarDeFlota(rodado) { return rodados.remove(rodado) }
+	method pesoTotalFlota() { return rodados.sum { auto => auto.peso()} }
+	method estaBienEquipada()
+	method capacidadTotalEnColor(color) { rodados.sum { auto => auto.capacidad(color) } }
+	method esGrande()
+}
+
