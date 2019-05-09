@@ -73,14 +73,22 @@ class AutosEspeciales {
 
 class Dependencia {
 	var property rodados = [] 
-	var property empleados = []
-	
+	var property empleados	
 	
 	method agregarAFlota(rodado) { return rodados.add(rodado) }
 	method quitarDeFlota(rodado) { return rodados.remove(rodado) }
-	method pesoTotalFlota() { return rodados.sum { auto => auto.peso()} }
-	method estaBienEquipada()
-	method capacidadTotalEnColor(color) { rodados.sum { auto => auto.capacidad(color) } }
-	method esGrande()
+	method pesoTotalFlota() { return rodados.sum ({ auto => auto.peso()}) }
+	method estaBienEquipada() { return rodados.size() >= 3 and rodados.all({auto => auto.velocidadMaxima() >= 100 } ) }
+	
+	method capacidadTotalEnColor(color) { return rodados.filter({auto => auto.color() == color })}
+	
+	method colorDelRodadoMasRapido() { return rodados.max ({auto => auto.velocidadMaxima()}).color() }
+	
+	method capacidadFaltante() { return empleados - self.capacidadTotal()}
+
+    method capacidadTotal() { return rodados.sum({ auto => auto.capacidad()})}
+
+	method esGrande() { return empleados >=}
+
 }
 
